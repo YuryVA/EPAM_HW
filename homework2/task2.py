@@ -24,7 +24,6 @@ def major_and_minor_elem(inp: List) -> Tuple[int, int]:
     return major_elem, minor_elem
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(major_and_minor_elem([3, 2, 3]))
     print(major_and_minor_elem([2, 2, 1, 1, 1, 2, 2]))
-

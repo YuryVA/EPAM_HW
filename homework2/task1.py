@@ -20,9 +20,12 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
             for word in line.split():
                 if not word[-1].isalnum():
                     word = word[:-1]
-                    unique_symb_in_word_dct[word] = unique_symb_in_word_dct.get(word,
-                                                                                len(set(word)))
-    temp_list = sorted(unique_symb_in_word_dct.items(), key=lambda x: x[1], reverse=True)[:10]
+                    unique_symb_in_word_dct[word] = unique_symb_in_word_dct.get(
+                        word, len(set(word))
+                    )
+    temp_list = sorted(
+        unique_symb_in_word_dct.items(), key=lambda x: x[1], reverse=True
+    )[:10]
     for pair in temp_list:
         longest_words.append(pair[0])
     return longest_words
@@ -32,7 +35,7 @@ def get_rarest_char(file_path: str) -> str:
     """Find rarest symbol for document"""
 
     unique_symb_dct = {}
-    rarest_chars = ''
+    rarest_chars = ""
     with open(file_path) as file:
         for line in file:
             for symbol in line:
@@ -40,7 +43,7 @@ def get_rarest_char(file_path: str) -> str:
     unique_symb_dct_sorted = sorted(unique_symb_dct.items(), key=lambda x: x[1])
     for pair in unique_symb_dct_sorted[:4]:
         rarest_chars += pair[0]
-    return ', '.join(rarest_chars)
+    return ", ".join(rarest_chars)
 
 
 def count_punctuation_chars(file_path: str) -> int:
@@ -65,7 +68,7 @@ def count_non_ascii_chars(file_path: str) -> int:
     with open(file_path) as file:
         for line in file:
             for word in line.split():
-                if '\\u' in word:
+                if "\\u" in word:
                     non_ascii_count += 1
     return non_ascii_count
 
@@ -77,7 +80,9 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
     with open(file_path) as file:
         for line in file:
             for word in line.split():
-                if '\\u' in word:
-                    ascii_symb = word[word.find('\\u'):word.find('\\u') + 6]
-                    most_com_ascii_count[ascii_symb] = most_com_ascii_count.get(ascii_symb, 0) + 1
+                if "\\u" in word:
+                    ascii_symb = word[word.find("\\u") : word.find("\\u") + 6]
+                    most_com_ascii_count[ascii_symb] = (
+                        most_com_ascii_count.get(ascii_symb, 0) + 1
+                    )
     return sorted(most_com_ascii_count.items(), key=lambda x: x[1], reverse=True)[0][0]
