@@ -14,3 +14,5 @@ def test_get_longest_diverse_words():
         "Termitenh\\u00fcgel",
         "\\u00dcberv\\u00f6lkerung",
     ]
+
+print()
