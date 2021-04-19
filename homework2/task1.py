@@ -7,7 +7,7 @@ Given a file containing text. Complete using only default collections:
     5) Find most common non ascii char for document
 """
 from typing import List
-
+import codecs
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
     """Find 10 longest words consisting from largest amount of unique symbols"""
@@ -27,7 +27,7 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
         unique_symb_in_word_dct.items(), key=lambda x: x[1], reverse=True
     )[:10]
     for pair in temp_list:
-        longest_words.append(pair[0])
+        longest_words.append(codecs.decode(pair[0], 'unicode_escape'))
     return longest_words
 
 
@@ -38,11 +38,11 @@ def get_rarest_char(file_path: str) -> str:
     rarest_chars = ""
     with open(file_path) as file:
         for line in file:
-            for symbol in line:
+            for symbol in codecs.decode(line, "unicode_escape"):
                 unique_symb_dct[symbol] = unique_symb_dct.get(symbol, 0) + 1
-    unique_symb_dct_sorted = sorted(unique_symb_dct.items(), key=lambda x: x[1])
-    for pair in unique_symb_dct_sorted[:4]:
-        rarest_chars += pair[0]
+    for pair in sorted(unique_symb_dct.items(), key=lambda x: x[1]):
+        if pair[1] == 1:
+            rarest_chars += pair[0]
     return ", ".join(rarest_chars)
 
 
@@ -81,7 +81,7 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
         for line in file:
             for word in line.split():
                 if "\\u" in word:
-                    ascii_symb = word[word.find("\\u") : word.find("\\u") + 6]
+                    ascii_symb = codecs.decode(word[word.find("\\u") : word.find("\\u") + 6], "unicode_escape")
                     most_com_ascii_count[ascii_symb] = (
                         most_com_ascii_count.get(ascii_symb, 0) + 1
                     )
