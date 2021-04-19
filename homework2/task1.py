@@ -6,8 +6,9 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
-from typing import List
 import codecs
+from typing import List
+
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
     """Find 10 longest words consisting from largest amount of unique symbols"""
@@ -27,7 +28,7 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
         unique_symb_in_word_dct.items(), key=lambda x: x[1], reverse=True
     )[:10]
     for pair in temp_list:
-        longest_words.append(codecs.decode(pair[0], 'unicode_escape'))
+        longest_words.append(codecs.decode(pair[0], "unicode_escape"))
     return longest_words
 
 
@@ -81,7 +82,9 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
         for line in file:
             for word in line.split():
                 if "\\u" in word:
-                    ascii_symb = codecs.decode(word[word.find("\\u") : word.find("\\u") + 6], "unicode_escape")
+                    ascii_symb = codecs.decode(
+                        word[word.find("\\u") : word.find("\\u") + 6], "unicode_escape"
+                    )
                     most_com_ascii_count[ascii_symb] = (
                         most_com_ascii_count.get(ascii_symb, 0) + 1
                     )
