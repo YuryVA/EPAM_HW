@@ -19,9 +19,12 @@ def slow_calculate(value):
     data = hashlib.md5(str(value).encode()).digest()
     return sum(struct.unpack("<" + "B" * len(data), data))
 
+
 data = range(500)
 
 if __name__ == "__main__":
     with Pool(32) as p:
+        t1 = time.time()
         res = p.map(slow_calculate, data)
-        print(sum(res))
+        t2 = time.time()
+        print(sum(res), t2 - t1)
