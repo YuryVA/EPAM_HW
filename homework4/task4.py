@@ -44,7 +44,7 @@ def fizzbuzz(n: int) -> List[str]:
     return fizzbuzz_list
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     import doctest
+
     doctest.testmod()
