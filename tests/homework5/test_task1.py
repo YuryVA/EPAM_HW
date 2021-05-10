@@ -6,7 +6,6 @@ from homework5.task1 import Student, Teacher
 teacher = Teacher("Daniil", "Shadrin")
 student = Student("Roman", "Petrov")
 homework_1 = teacher.create_homework("create 2 simple classes", 5)
-now_time = datetime.datetime.now()
 homework_2 = teacher.create_homework("Learn functions", 0)
 
 
@@ -23,7 +22,6 @@ def test_student():
 
 
 def test_homework():
-    assert homework_1.created == now_time
     assert homework_1.text == "create 2 simple classes"
     assert homework_1.deadline == datetime.timedelta(days=5)
     assert homework_1.is_active() is True
