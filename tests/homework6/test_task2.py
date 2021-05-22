@@ -12,7 +12,8 @@ advanced_python_teacher = Teacher("Aleksandr", "Smetanin")
 lazy_student = Student("Roman", "Petrov")
 good_student = Student("Lev", "Sokolov")
 
-oop_hw = opp_teacher.create_homework("Learn OOP", 0)
+oop_hw_fast = opp_teacher.create_homework("Learn OOP immediately", 0)
+oop_hw = opp_teacher.create_homework("Learn OOP", 1)
 docs_hw = opp_teacher.create_homework("Read docs", 5)
 
 result_1 = good_student.do_homework(oop_hw, "I have done this hw")
@@ -34,7 +35,7 @@ def test_student_first_name_last_name():
 def test_student_late_with_homework_raises_deadline_error():
     time.sleep(1)
     with pytest.raises(DeadlineError) as exc:
-        lazy_student.do_homework(oop_hw, "I have done this hw")
+        lazy_student.do_homework(oop_hw_fast, "I have done this hw")
     exc_message = exc.value.args[0]
     assert exc_message == "You are late"
 
@@ -56,7 +57,7 @@ def test_homework_is_active_return_true():
 
 
 def test_homework_is_active_return_false():
-    assert oop_hw.is_active() is False
+    assert oop_hw_fast.is_active() is False
 
 
 def test_teacher_check_homework_return_false():
