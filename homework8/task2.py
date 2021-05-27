@@ -8,9 +8,10 @@ class TableData:
         self.cursor = self.conn.cursor()
 
     def __len__(self):
-        self.cursor.execute(f"SELECT * from {self.table_name}")
-        data = self.cursor.fetchall()
-        return len(data)
+        n = 0
+        for row in self.cursor.execute(f'SELECT * from {self.table_name}'):
+            n += 1
+        return n
 
     def __getitem__(self, item):
         self.cursor.execute(
@@ -20,34 +21,33 @@ class TableData:
         return data
 
     def __contains__(self, item):
-        self.cursor.execute(f"SELECT * from {self.table_name}")
-        for record in self.cursor.fetchall():
+        for record in self.cursor.execute(f"SELECT * from {self.table_name}"):
             if item in record:
                 return True
             pass
 
-    # def __iter__(self):
-    #     self.conn.row_factory = sqlite3.Row
-    #     self.cur = self.conn.cursor()
-    #     return self.cur.execute(f'SELECT * from {self.table_name}').fetchone()
-    #
-    # def __next__(self):
-    #     self.conn.row_factory = sqlite3.Row
-    #     self.cur = self.conn.cursor()
-    #     return self.cur.execute(f'SELECT * from {self.table_name}').fetchone()
+    def __iter__(self):
+        self.cursor.execute(f"SELECT * from {self.table_name}")
+        return self
 
+    def __next__(self):
+        result = self.cursor.fetchone()
+        while result:
+            return result
+        raise StopIteration
 
-if __name__ == "__main__":
-    presidents = TableData(database_name="example.sqlite", table_name="presidents")
-    print(len(presidents))
-    print(presidents["Yeltsin"])
-    print("Yeltsin" in presidents)
-    # for president in presidents:
-    #     print(tuple(president))
-
-    books = TableData(database_name="example.sqlite", table_name="books")
-    print(len(books))
-    print(books["1984"])
-    print("Bradbury" in books)
-    # for president in presidents:
-    #     print(president)
+#
+# if __name__ == "__main__":
+#     presidents = TableData(database_name="example.sqlite", table_name="presidents")
+#     print(len(presidents))
+#     print(presidents["Yeltsin"])
+#     print("Yeltsin" in presidents)
+#     for president in presidents:
+#         print(president)
+#
+#     books = TableData(database_name="example.sqlite", table_name="books")
+#     print(len(books))
+#     print(books["1984"])
+#     print("Bradbury" in books)
+#     for book in books:
+#         print(book)
