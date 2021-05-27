@@ -8,12 +8,16 @@ class TableData:
         self.cursor = self.conn.cursor()
 
     def __len__(self):
+        """return length of sql table"""
+
         n = 0
-        for row in self.cursor.execute(f'SELECT * from {self.table_name}'):
+        for row in self.cursor.execute(f"SELECT * from {self.table_name}"):
             n += 1
         return n
 
     def __getitem__(self, item):
+        """return TableData[item] row"""
+
         self.cursor.execute(
             f"SELECT * from {self.table_name} where name=:name", {"name": item}
         )
@@ -21,12 +25,16 @@ class TableData:
         return data
 
     def __contains__(self, item):
-        for record in self.cursor.execute(f"SELECT * from {self.table_name}"):
-            if item in record:
+        """check if item in TableData"""
+
+        for row in self.cursor.execute(f"SELECT * from {self.table_name}"):
+            if item in row:
                 return True
             pass
 
     def __iter__(self):
+        """implements iteration protocol"""
+
         self.cursor.execute(f"SELECT * from {self.table_name}")
         return self
 
@@ -35,19 +43,3 @@ class TableData:
         while result:
             return result
         raise StopIteration
-
-#
-# if __name__ == "__main__":
-#     presidents = TableData(database_name="example.sqlite", table_name="presidents")
-#     print(len(presidents))
-#     print(presidents["Yeltsin"])
-#     print("Yeltsin" in presidents)
-#     for president in presidents:
-#         print(president)
-#
-#     books = TableData(database_name="example.sqlite", table_name="books")
-#     print(len(books))
-#     print(books["1984"])
-#     print("Bradbury" in books)
-#     for book in books:
-#         print(book)
