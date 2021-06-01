@@ -20,7 +20,7 @@ def create_temp_file_1(tmpdir_factory):
 def create_temp_file_2(tmpdir_factory):
     temp_file_data_2 = "2\n4\n6\n8"
     my_dir = tmpdir_factory.mktemp("my_temp_dir")
-    file_2 = my_dir.join("task1_temp_1.txt")
+    file_2 = my_dir.join("file2.txt")
     file_2.write(temp_file_data_2)
     path_2 = os.path.abspath(file_2)
     return path_2
