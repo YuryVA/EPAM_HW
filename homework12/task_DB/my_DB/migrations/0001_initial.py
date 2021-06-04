@@ -8,37 +8,82 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Homework',
+            name="Homework",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hmw_id', models.CharField(max_length=200, verbose_name='Homework id')),
-                ('text', models.TextField(verbose_name='Homework Text')),
-                ('created', models.DateField(auto_now_add=True, verbose_name='Created')),
-                ('deadline', models.DateTimeField(verbose_name='Deadline')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "hmw_id",
+                    models.CharField(max_length=200, verbose_name="Homework id"),
+                ),
+                ("text", models.TextField(verbose_name="Homework Text")),
+                (
+                    "created",
+                    models.DateField(auto_now_add=True, verbose_name="Created"),
+                ),
+                ("deadline", models.DateTimeField(verbose_name="Deadline")),
             ],
         ),
         migrations.CreateModel(
-            name='Teachers',
+            name="Teachers",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=200)),
-                ('last_name', models.CharField(max_length=200)),
-                ('hmw_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='my_DB.homework')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=200)),
+                ("last_name", models.CharField(max_length=200)),
+                (
+                    "hmw_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="my_DB.homework"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Students',
+            name="Students",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=200, verbose_name='First Name')),
-                ('last_name', models.CharField(max_length=200, verbose_name='Last Name')),
-                ('hmw_res', models.TextField(verbose_name='Homework Solution')),
-                ('hmw_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='my_DB.homework')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(max_length=200, verbose_name="First Name"),
+                ),
+                (
+                    "last_name",
+                    models.CharField(max_length=200, verbose_name="Last Name"),
+                ),
+                ("hmw_res", models.TextField(verbose_name="Homework Solution")),
+                (
+                    "hmw_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="my_DB.homework"
+                    ),
+                ),
             ],
         ),
     ]

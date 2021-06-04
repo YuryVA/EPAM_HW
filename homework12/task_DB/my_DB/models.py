@@ -8,7 +8,7 @@ class Homework(models.Model):
     deadline = models.DateTimeField("Deadline")
 
     def __str__(self):
-        return '%s %s %s %s' % (self.hmw_id, self.text, self.created, self.deadline)
+        return "%s %s %s %s" % (self.hmw_id, self.text, self.created, self.deadline)
 
 
 class Students(models.Model):
@@ -18,7 +18,12 @@ class Students(models.Model):
     hmw_res = models.TextField("Homework Solution")
 
     def __str__(self):
-        return '%s %s %s %s' % (self.first_name, self.last_name, self.hmw_id, self.hmw_res)
+        return "%s %s %s %s" % (
+            self.first_name,
+            self.last_name,
+            self.hmw_id,
+            self.hmw_res,
+        )
 
 
 class Teachers(models.Model):
@@ -27,4 +32,4 @@ class Teachers(models.Model):
     hmw_id = models.ForeignKey(Homework, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s %s' % (self.first_name, self.last_name, self.hmw_id)
+        return "%s %s %s" % (self.first_name, self.last_name, self.hmw_id)
