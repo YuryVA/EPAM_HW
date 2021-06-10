@@ -214,3 +214,26 @@ def test_top_ten_high_year_growth():
         {"code": "ALLE", "name": "Allegion PLC ", "growth": 19.57},
         {"code": "AAL", "name": "American Airlines Inc ", "growth": 19.4},
     ]
+
+
+def test_top_ten_potential_profit():
+    assert potential_profit(companies_data_dict) == [
+        {
+            "code": "GOOGL",
+            "name": "Alphabet A (ex Google) ",
+            "potential profit": "1079.73",
+        },
+        {"code": "AMZN", "name": "Amazon ", "potential profit": "1050.04"},
+        {"code": "ALB", "name": "Albemarle Corp. ", "potential profit": "115.91"},
+        {"code": "MMM", "name": "3M Co. ", "potential profit": "60.15"},
+        {"code": "ALL", "name": "Allstate Corp. ", "potential profit": "55.03"},
+        {
+            "code": "AMD",
+            "name": "AMD (Advanced Micro Devices)  Inc. ",
+            "potential profit": "50.81",
+        },
+        {"code": "ALLE", "name": "Allegion PLC ", "potential profit": "50.72"},
+        {"code": "ALK", "name": "Alaska Air Group Inc. ", "potential profit": "41.25"},
+        {"code": "AOS", "name": "A.O. Smith Corp. ", "potential profit": "29.17"},
+        {"code": "AEE", "name": "Ameren Corp. ", "potential profit": "19.73"},
+    ]
