@@ -1,11 +1,7 @@
-from homework10.task1 import (
-    get_companies_data,
-    get_companies_pages,
-    top_ten_high_year_growth,
-    top_ten_low_p_e,
-    top_ten_most_expensive_stocks,
-    top_ten_potential_profit,
-)
+from homework10.task1 import (get_companies_data, get_companies_pages,
+                              top_ten_high_year_growth, top_ten_low_p_e,
+                              top_ten_most_expensive_stocks,
+                              top_ten_potential_profit)
 
 list_of_companies_pages = [
     [
