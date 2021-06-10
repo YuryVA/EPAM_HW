@@ -37,7 +37,7 @@ def get_htmls(url_list: list):
     return htmls
 
 
-def get_companies_pages(html: str) -> list:
+def get_pages(html: str) -> list:
     """
     create list - [
                    company name,
@@ -66,7 +66,7 @@ def get_companies_pages(html: str) -> list:
     return links
 
 
-def get_companies_data(html) -> dict:
+def get_data(html) -> dict:
     """
     create dictionary with company data {
                                         company_code: company code,
@@ -152,7 +152,7 @@ def main(url: str) -> dict:
 
     if __name__ == "__main__":
         with ProcessPoolExecutor() as pool:
-            result = pool.map(get_companies_pages, html_pages)
+            result = pool.map(get_pages, html_pages)
             for res in result:
                 companies_pages_list.extend(res)
 
@@ -165,7 +165,7 @@ def main(url: str) -> dict:
     if __name__ == "__main__":
         with ProcessPoolExecutor() as pool:
             for pair, data_dict in zip(
-                companies_year_change, pool.map(get_companies_data, html_comp)
+                companies_year_change, pool.map(get_data, html_comp)
             ):
                 company_name = data_dict.pop("company_name")
                 companies_pages_data[company_name] = data_dict
@@ -174,7 +174,7 @@ def main(url: str) -> dict:
     return companies_pages_data
 
 
-def get_conversion_course_usd_rub():
+def convert_usd_rub():
     """
     get realtime conversion course from usd to rub
     """
@@ -194,7 +194,7 @@ def get_conversion_course_usd_rub():
     return float(conversion_course.replace(",", "."))
 
 
-def top_ten_most_expensive_stocks(data_dict: dict):
+def most_exp_stocks(data_dict: dict):
     """
     create JSON with top 10 most expensive companies
     """
@@ -209,13 +209,13 @@ def top_ten_most_expensive_stocks(data_dict: dict):
             {
                 "code": value["company_code"],
                 "name": key,
-                "price": f"{value['current_value'] * get_conversion_course_usd_rub():.2f}",
+                "price": f"{value['current_value'] * convert_usd_rub():.2f}",
             }
         )
     return most_exp_stocks_json
 
 
-def top_ten_low_p_e(data_dict: dict):
+def low_p_e(data_dict: dict):
     """
     create JSON with top 10 companies with lowest p/e ratio
     """
@@ -235,7 +235,7 @@ def top_ten_low_p_e(data_dict: dict):
     return low_p_e_json
 
 
-def top_ten_high_year_growth(data_dict: dict):
+def high_year_grow(data_dict: dict):
     """
     create JSON with top 10 companies with highest last year growth
     """
@@ -256,7 +256,7 @@ def top_ten_high_year_growth(data_dict: dict):
     return high_year_json
 
 
-def top_ten_potential_profit(data_dict: dict, n=1):
+def potential_profit(data_dict: dict, n=1):
     """
     create JSON with top 10 companies with potential profit for the last year
     :param n: number of stocks

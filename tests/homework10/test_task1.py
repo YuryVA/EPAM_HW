@@ -1,7 +1,5 @@
-from homework10.task1 import (get_companies_data, get_companies_pages,
-                              top_ten_high_year_growth, top_ten_low_p_e,
-                              top_ten_most_expensive_stocks,
-                              top_ten_potential_profit)
+from homework10.task1 import (get_data, get_pages, high_year_grow, low_p_e,
+                              most_exp_stocks, potential_profit)
 
 list_of_companies_pages = [
     [
@@ -149,12 +147,12 @@ companies_data_dict = {
 
 def test_get_companies_pages():
     with open("tests/homework10/SnP500Stock.htm") as f:
-        assert get_companies_pages(f.read()) == list_of_companies_pages
+        assert get_pages(f.read()) == list_of_companies_pages
 
 
 def test_get_companies_data():
     with open("tests/homework10/GRMNStock.htm") as f:
-        assert get_companies_data(f.read()) == {
+        assert get_data(f.read()) == {
             "company_code": "GRMN",
             "company_name": "Garmin Ltd.",
             "market_cap": 27.37,
@@ -166,7 +164,7 @@ def test_get_companies_data():
 
 
 def test_top_ten_most_expensive_stocks():
-    assert top_ten_most_expensive_stocks(companies_data_dict) == [
+    assert most_exp_stocks(companies_data_dict) == [
         {"code": "AMZN", "name": "Amazon ", "price": "236287.75"},
         {"code": "GOOGL", "name": "Alphabet A (ex Google) ", "price": "173432.90"},
         {"code": "MMM", "name": "3M Co. ", "price": "14571.56"},
@@ -189,7 +187,7 @@ def test_top_ten_most_expensive_stocks():
 
 
 def test_top_ten_low_p_e():
-    assert top_ten_low_p_e(companies_data_dict) == [
+    assert low_p_e(companies_data_dict) == [
         {"code": "ALK", "name": "Alaska Air Group Inc. ", "P/E": -5.1},
         {"code": "AAL", "name": "American Airlines Inc ", "P/E": -0.81},
         {"code": "ALL", "name": "Allstate Corp. ", "P/E": 7.27},
@@ -204,7 +202,7 @@ def test_top_ten_low_p_e():
 
 
 def test_top_ten_high_year_growth():
-    assert top_ten_high_year_growth(companies_data_dict) == [
+    assert high_year_grow(companies_data_dict) == [
         {"code": "ALB", "name": "Albemarle Corp. ", "growth": 96.82},
         {"code": "GOOGL", "name": "Alphabet A (ex Google) ", "growth": 65.9},
         {"code": "AMD", "name": "AMD (Advanced Micro Devices)  Inc. ", "growth": 53.58},
@@ -219,7 +217,7 @@ def test_top_ten_high_year_growth():
 
 
 def test_top_ten_potential_profit():
-    assert top_ten_potential_profit(companies_data_dict) == [
+    assert potential_profit(companies_data_dict) == [
         {
             "code": "GOOGL",
             "name": "Alphabet A (ex Google) ",
