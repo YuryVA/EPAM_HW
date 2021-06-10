@@ -37,7 +37,7 @@ def get_htmls(url_list: list):
     return htmls
 
 
-def get_companies_pages(html):
+def get_companies_pages(html: str) -> list:
     """
     create list - [
                    company name,
@@ -66,7 +66,7 @@ def get_companies_pages(html):
     return links
 
 
-def get_companies_data(html):
+def get_companies_data(html) -> dict:
     """
     create dictionary with company data {
                                         company_code: company code,
@@ -126,7 +126,7 @@ def get_companies_data(html):
     return company_data
 
 
-def main(url: str):
+def main(url: str) -> dict:
     """
     create dictionary with companies data - {
                                             company name:
@@ -145,7 +145,7 @@ def main(url: str):
     companies_pages_list = []
     companies_pages_data = {}
 
-    url_list = [f"{url}?p={i}" for i in range(1, 12)]
+    url_list = [f"{url}?p={i}" for i in range(1, 2)]
 
     ayo_html_pages = get_htmls(url_list)
     html_pages = [html.result() for html in ayo_html_pages]
@@ -284,7 +284,3 @@ def top_ten_potential_profit(data_dict: dict, n=1):
 
 if __name__ == "__main__":
     data = main("https://markets.businessinsider.com/index/components/s&p_500")
-    print(top_ten_most_expensive_stocks(data))
-    print(top_ten_low_p_e(data))
-    print(top_ten_high_year_growth(data))
-    print(top_ten_potential_profit(data))
